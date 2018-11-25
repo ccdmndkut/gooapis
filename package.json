@@ -21,6 +21,7 @@
   "dependencies": {
     "async": "^2.6.1",
     "googleapis": "^35.0.0",
+    "progress": "^2.0.1",
     "promise": "^8.0.2"
   }
 }

@@ -6,9 +6,15 @@ const async = require('async');
 const Promise = require('promise');
 const uuid = require('uuid');
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
-
+const ProgressBar = require('progress');
 const TOKEN_PATH = 'token.json';
-
+console.log();
+const bar = new ProgressBar('  downloading [:bar] :rate/bps :percent :etas', {
+  complete: '=',
+  incomplete: ' ',
+  width: 20,
+  total: 100
+});
 fs.readFile('credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   authorize(JSON.parse(content), listFiles);
@@ -72,7 +78,7 @@ var fileIds = [];
 var listFiles = function(auth) {
   const drive = google.drive({version: 'v3', auth});
   drive.files.list({
-    pageSize: 1000,
+    pageSize: 99,
     q: "mimeType = 'application/vnd.google-apps.folder' and name contains 'cam'",
     fields: 'nextPageToken, files(id)',
   }, (err, res) => {
@@ -85,6 +91,7 @@ var listFiles = function(auth) {
         // var fileId = file.id;
         // drive.files.delete({fileId: fileId})
       });
+  
 // console.log(myids)
 trial(auth)
     } else {
@@ -104,7 +111,16 @@ var trial = function(auth) {
         console.error(err);
         myidsCallback(err);
       } else {
-        console.log('Permission ID: ' + fileId.id)
+        console.clear()
+var b = b++
+        var l = fileIds.length - 1;
+        var i = fileIds.indexOf(fileId);
+        var ia = parseInt(i, 10);
+        var calcu = (100 - (l - i)) / 1;
+bar.tick(b);
+
+        // console.clear()
+        // console.log(calcu+"%")
         myidsCallback();
       }
     });
@@ -113,6 +129,7 @@ var trial = function(auth) {
       // Handle error
       console.error(err);
     } else {
+
       console.log(fileIds)
       // All permissions inserted
     }
