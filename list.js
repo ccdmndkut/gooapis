@@ -78,45 +78,16 @@ var listFiles = function(auth) {
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     const files = res.data.files;
-    if (files.length) {
-      files.map((file) => {
-        fileIds.push(file)
-        // console.log(file.id);
-        // var fileId = file.id;
-        // drive.files.delete({fileId: fileId})
-      });
-// console.log(myids)
-trial(auth)
-    } else {
-      console.log('No files found.');
-    }
+    console.log(files.length)
+//     if (files.length) {
+//       files.map((file) => {
+//         fileIds.push(file)
+//         // console.log(file.id);
+//         // var fileId = file.id;
+//         // drive.files.delete({fileId: fileId})
+//       });
+// console.log(fileIds)
+
+//     } 
   });
 }
-var trial = function(auth) {
-  async.eachSeries(fileIds, function (fileId, myidsCallback) {
-  const drive = google.drive({version: 'v3', auth});
-
-    drive.files.delete({
-      fileId: fileId.id,
-    }, function (err, res) {
-      if (err) {
-        // Handle error...
-        console.error(err);
-        myidsCallback(err);
-      } else {
-        console.log('Permission ID: ' + fileId.id)
-        myidsCallback();
-      }
-    });
-  }, function (err) {
-    if (err) {
-      // Handle error
-      console.error(err);
-    } else {
-      console.log(fileIds)
-      // All permissions inserted
-    }
-  });
-
-}  
-// [END drive_quickstart]
