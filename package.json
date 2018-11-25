@@ -1,0 +1,26 @@
+{
+  "name": "gooapis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccdmndkut/gooapis.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccdmndkut/gooapis/issues"
+  },
+  "homepage": "https://github.com/ccdmndkut/gooapis#readme",
+  "dependencies": {
+    "async": "^2.6.1",
+    "googleapis": "^35.0.0",
+    "promise": "^8.0.2"
+  }
+}
